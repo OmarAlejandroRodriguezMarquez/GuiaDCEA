@@ -14,5 +14,9 @@ namespace GuiaDCEA.API.Data
         {
             base.OnModelCreating(builder);
         }
+
+        public DbSet<Lugar> Lugares { get; set; }
+        public DbSet<Fotografia> Fotografias { get; set; }
+        public DbSet<FotografiaLugar> FotografiasLugares { get; set; }
     }
 }

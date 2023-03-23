@@ -25,7 +25,7 @@ namespace GuiaDCEA.API.Controllers
             this.configuration = configuration;
         }
 
-        [HttpPost]
+        [HttpPost("crear")]
         public async Task<ActionResult<TokenUsuario>> CrearUsuario([FromBody] DatosUsuario datosUsuario)
         {
             var user = new IdentityUser { Email = datosUsuario.Email, UserName= datosUsuario.Email };
@@ -39,6 +39,21 @@ namespace GuiaDCEA.API.Controllers
             else
             {
                 return BadRequest(resultado.Errors);
+            }
+        }
+
+        [HttpPost("login")]
+        public async Task<ActionResult<TokenUsuario>> Login([FromBody] DatosUsuario datosUsuario)
+        {
+            var result = await signInManager.PasswordSignInAsync(datosUsuario.Email, datosUsuario.Password, isPersistent:false, lockoutOnFailure:false);
+
+            if (result.Succeeded)
+            {
+                return GenerarToken(datosUsuario);
+            }
+            else
+            {
+                return BadRequest();
             }
         }
 
