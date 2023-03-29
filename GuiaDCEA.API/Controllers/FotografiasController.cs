@@ -49,8 +49,7 @@ namespace GuiaDCEA.API.Controllers
             {
                 var fotografia = await context.Fotografias.Where(f => f.Id == item).FirstOrDefaultAsync();
                 fotografias.Add(fotografia);
-            }
-            
+            }          
             return fotografias;
         }
     }
